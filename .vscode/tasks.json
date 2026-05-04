@@ -1,0 +1,34 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "GPFinder: Install dependencies",
+      "type": "shell",
+      "command": "python3 -m venv .venv && .venv/bin/pip install -r requirements.txt",
+      "options": {
+        "cwd": "${workspaceFolder}"
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "GPFinder: Run (no Elasticsearch)",
+      "type": "shell",
+      "command": "GPFINDER_ES_ENABLED=false PORT=5001 .venv/bin/python app.py",
+      "dependsOn": "GPFinder: Install dependencies",
+      "options": {
+        "cwd": "${workspaceFolder}"
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "GPFinder: Run (with Elasticsearch)",
+      "type": "shell",
+      "command": "GPFINDER_ES_ENABLED=true GPFINDER_ES_URL=http://localhost:9200 GPFINDER_ES_INDEX=gpfinder-practices PORT=5001 .venv/bin/python app.py",
+      "dependsOn": "GPFinder: Install dependencies",
+      "options": {
+        "cwd": "${workspaceFolder}"
+      },
+      "problemMatcher": []
+    }
+  ]
+}

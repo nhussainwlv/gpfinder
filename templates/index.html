@@ -1,0 +1,117 @@
+{% extends "base.html" %}
+{% block content %}
+<section class="hero">
+  <div class="container">
+    <h1 class="hero-title">Find a GP near you</h1>
+    <p class="hero-subtitle">Search by postcode or town name across England</p>
+    <div class="language-picker-wrap">
+      <label for="languageSelect" class="search-options-label">Language</label>
+      <select id="languageSelect" class="radius-select" aria-label="Choose language">
+        <option value="en" selected>English</option>
+        <option value="hi">Hindi</option>
+        <option value="zh">Chinese</option>
+        <option value="es">Spanish</option>
+        <option value="ar">Arabic</option>
+        <option value="fr">French</option>
+      </select>
+    </div>
+    <form class="search-form" id="searchForm" role="search" aria-label="Search for GP practices">
+      <div class="search-wrap">
+        <label for="searchInput" class="visually-hidden">Postcode or town</label>
+        <input
+          type="search"
+          id="searchInput"
+          class="search-input"
+          name="q"
+          placeholder="e.g. B1 1AA or Birmingham"
+          autocomplete="postal-code"
+          autofocus
+        >
+        <button type="submit" class="search-btn" id="searchBtn" aria-label="Search">
+          <span class="search-btn-text">Search</span>
+          <span class="search-btn-icon" aria-hidden="true"></span>
+        </button>
+        <button type="button" class="voice-btn" id="voiceSearchBtn" aria-label="Use voice search" title="Use voice search">
+          <span aria-hidden="true">🎤</span>
+        </button>
+      </div>
+      <p class="voice-status" id="voiceStatus" hidden></p>
+      <div class="quality-panel" role="group" aria-labelledby="qualityPanelTitle">
+        <div class="quality-panel-header">
+          <p id="qualityPanelTitle" class="quality-panel-title">Search quality</p>
+          <button
+            type="button"
+            class="quality-help-btn"
+            id="qualityHelpBtn"
+            aria-label="Learn about search quality modes"
+            aria-expanded="false"
+            aria-controls="qualityHelpText"
+          >
+            ?
+          </button>
+        </div>
+        <p id="qualityHelpText" class="quality-help-text" hidden>
+          GP-focused mode prioritises surgery and practice records. Expanded mode also includes nearby primary care services such as hubs and community clinics.
+        </p>
+      </div>
+      <div class="search-options">
+        <label for="radiusSelect" class="search-options-label">Within</label>
+        <select id="radiusSelect" class="radius-select" name="radius" aria-label="Search radius in miles">
+          <option value="5">5 miles</option>
+          <option value="10">10 miles</option>
+          <option value="15" selected>15 miles</option>
+          <option value="20">20 miles</option>
+          <option value="25">25 miles</option>
+        </select>
+        <label class="scope-toggle">
+          <input type="checkbox" id="scopeToggle" class="scope-toggle-input" />
+          <span class="scope-toggle-label">Expanded mode: include broader primary care services</span>
+        </label>
+      </div>
+      <p class="search-hint">Enter a postcode to find GPs by distance, or search by town name</p>
+    </form>
+  </div>
+</section>
+<section class="results-section" id="resultsSection" aria-live="polite" aria-atomic="true" hidden>
+  <div class="container">
+    <div class="results-header" id="resultsHeader">
+      <div>
+        <h2 class="results-title" id="resultsTitle">Results</h2>
+        <p class="results-meta" id="resultsMeta"></p>
+      </div>
+      <div class="results-controls">
+        <label for="sortSelect" class="results-controls-label">Sort by</label>
+        <select id="sortSelect" class="sort-select" aria-label="Sort search results">
+          <option value="relevance" selected>Relevance</option>
+          <option value="distance">Distance</option>
+          <option value="name">Practice name</option>
+          <option value="town">Town</option>
+        </select>
+        <button type="button" class="speak-results-btn" id="speakResultsBtn" aria-label="Read top results aloud">
+          Read top results
+        </button>
+        <button type="button" class="speak-results-btn stop-speak-btn" id="stopSpeakBtn" hidden aria-label="Stop reading aloud">
+          Stop reading
+        </button>
+      </div>
+    </div>
+    <div class="results-error" id="resultsError" role="alert" hidden></div>
+    <div class="results-loading" id="resultsLoading" hidden>
+      <div class="spinner" aria-hidden="true"></div>
+      <p>Searching…</p>
+    </div>
+    <div class="results-list" id="resultsList"></div>
+    <div class="results-empty" id="resultsEmpty" hidden>
+      <p>No practices found for your search. Try a different postcode or town.</p>
+    </div>
+  </div>
+</section>
+<section class="results-placeholder" id="resultsPlaceholder">
+  <div class="container">
+    <p class="placeholder-text">Enter a postcode or town above to find GP practices.</p>
+  </div>
+</section>
+{% endblock %}
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/app.js') }}"></script>
+{% endblock %}

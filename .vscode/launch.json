@@ -1,0 +1,33 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "GPFinder: Run app (no Elasticsearch)",
+      "type": "debugpy",
+      "request": "launch",
+      "program": "${workspaceFolder}/app.py",
+      "env": {
+        "FLASK_DEBUG": "true",
+        "GPFINDER_ES_ENABLED": "false",
+        "PORT": "5001"
+      },
+      "cwd": "${workspaceFolder}",
+      "console": "integratedTerminal"
+    },
+    {
+      "name": "GPFinder: Run app (with Elasticsearch)",
+      "type": "debugpy",
+      "request": "launch",
+      "program": "${workspaceFolder}/app.py",
+      "env": {
+        "FLASK_DEBUG": "true",
+        "GPFINDER_ES_ENABLED": "true",
+        "GPFINDER_ES_URL": "http://localhost:9200",
+        "GPFINDER_ES_INDEX": "gpfinder-practices",
+        "PORT": "5001"
+      },
+      "cwd": "${workspaceFolder}",
+      "console": "integratedTerminal"
+    }
+  ]
+}
