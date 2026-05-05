@@ -14,7 +14,7 @@ pip install -r requirements.txt
 python app.py
 ```
 
-Open **http://localhost:5000** in your browser.
+Open **https://gpfinder-2.onrender.com** in your browser.
 
 ## Run on another laptop (recommended steps)
 
